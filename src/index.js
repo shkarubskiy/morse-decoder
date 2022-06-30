@@ -45,15 +45,12 @@ function decode(expr) {
     if (letter == "**********") letterDecoded = " ";
     else {
       for (let j = 0; j < letter.length - 1; j += 2) {
-        let l = letter.slice(j, j + 2);
-        let lDecoded = "";
-        if (l == "10") lDecoded = ".";
-        if (l == "11") lDecoded = "-";
-        letterDecoded += lDecoded;
+        if (letter.slice(j, j + 2) != "00") {
+          letterDecoded += letter.slice(j, j + 2) == "10" ? "." : "-";
+        }
       }
     }
-    if (letterDecoded == " ") result += letterDecoded;
-    else result += MORSE_TABLE[letterDecoded];
+    result += letterDecoded == " " ? letterDecoded : MORSE_TABLE[letterDecoded];
   }
   return result;
 }
